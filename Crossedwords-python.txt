@@ -1,0 +1,184 @@
+import os
+cmdLimparTela = "clear" #Muda de acordo com o sistema operacional... Windows = cls / Linux = clear
+
+matriz = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+         ,[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+         ,[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+         ,[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] , [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+cor = "nada"
+restantes = 6
+aux = ["","","","","",""]
+verifcRepeticao = False
+
+def setNulo():
+    #1 grau
+    matriz[2][4] = "( 1 )"
+    matriz[3][4] = "( - )"
+    matriz[4][4] = "( - )"
+    matriz[5][4] = "( - )"
+    matriz[6][4] = "( - )"
+  
+    #2 orange
+    matriz[4][2] = "( 2 )"
+    matriz[4][3] = "( - )"
+    matriz[4][4] = "( - )"
+    matriz[4][5] = "( - )"
+    matriz[4][6] = "( - )"
+    matriz[4][7] = "( - )"
+    matriz[4][8] = "( - )"
+  
+    #3 purple
+    matriz[6][2] = "( 3 )"
+    matriz[6][3] = "( - )"
+    matriz[6][4] = "( - )"
+    matriz[6][5] = "( - )"
+    matriz[6][6] = "( - )"
+    matriz[6][7] = "( - )"
+    matriz[6][8] = "( - )"
+  
+    #4 blue
+    matriz[0][8] = "( 4 )"
+    matriz[1][8] = "( - )"
+    matriz[2][8] = "( - )"
+    matriz[3][8] = "( - )"
+    matriz[4][8] = "( - )"
+  
+    #5 blau
+    matriz[2][6] = "( 5 )"
+    matriz[2][7] = "( - )"
+    matriz[2][8] = "( - )"
+    matriz[2][9] = "( - )"
+    matriz[2][10] = "( - )"
+  
+    #6 rose
+    matriz[5][5] = "( 6 )"
+    matriz[6][5] = "( - )"
+    matriz[7][5] = "( - )"
+    matriz[8][5] = "( - )"
+    matriz[9][5] = "( - )"
+def layout():
+    global restantes
+    for i in range(0,10):
+        for c in range(0,10):
+            if (matriz[i][c] == 0):
+                matriz[i][c] = "     "
+            print(matriz[i][c], end="")
+        print("")
+    print("")
+    print("  *Informações das cores*")
+    print(" (1) Cinza (2) Laranja")
+    print(" (3) Roxa  (4) Azul")
+    print(" (5) Azul  (6) Rosa")
+    print("")
+    print(f" Quantidade de palavras para ser completadas ( {restantes} )")
+
+def verificarEscolha():
+    global cor
+    if(cor.lower() != "blue" and cor.lower() != "blau" and cor.lower() != "orange" and cor.lower() != "ourple" and cor.lower() != "rose" and cor.lower() != "grau" and cor.lower() != "nada"):
+        return True
+    else:
+        return False
+
+def verificarFimDoJogo():
+    if (restantes == 0):
+        return True
+    else:
+        return False
+
+def entradaCor():
+    global cor
+    global restantes
+    if (cor.lower() == "blue" and aux[0] != "blue"):
+        # 4 Blue
+        matriz[1][8] = "( B )"
+        matriz[2][8] = "( l )"
+        matriz[3][8] = "( u )"
+        matriz[4][8] = "( e )"
+        restantes = restantes-1
+        aux[0] = "blue"
+        cor = "nada"
+
+    if (cor.lower() == "blau" and aux[1] != "blau"):
+        # 5 Blue
+        matriz[2][6] = "( B )"
+        matriz[2][7] = "( l )"
+        matriz[2][8] = "( a )"
+        matriz[2][9] = "( u )"
+        restantes = restantes-1
+        aux[1] = "blau"
+        cor = "nada"
+
+    if (cor.lower() == "rose" and aux[2] != "rose"):
+        # 6 Rose
+        matriz[6][5] = "( R )"
+        matriz[7][5] = "( o )"
+        matriz[8][5] = "( s )"
+        matriz[9][5] = "( e )"
+        restantes = restantes-1
+        aux[2] = "rose"
+        cor = "nada"
+
+    if (cor.lower() == "purple" and aux[3] != "purple"):
+        # 3 Purple
+        matriz[6][3] = "( P )"
+        matriz[6][4] = "( u )"
+        matriz[6][5] = "( r )"
+        matriz[6][6] = "( p )"
+        matriz[6][7] = "( l )"
+        matriz[6][8] = "( e )"
+        restantes = restantes-1
+        aux[3] = "purple"
+        cor = "nada"
+
+    if (cor.lower() == "grau" and aux[4] != "grau"):
+        # 1 Grau
+        matriz[3][4] = "( G )"
+        matriz[4][4] = "( r )"
+        matriz[5][4] = "( a )"
+        matriz[6][4] = "( u )"
+        restantes = restantes-1
+        aux[4] = "grau"
+        cor = "nada"
+
+    if (cor.lower() == "orange" and aux[5] != "orange"):
+        # 2 Orange
+        matriz[4][3] = "( O )"
+        matriz[4][4] = "( r )"
+        matriz[4][5] = "( a )"
+        matriz[4][6] = "( n )"
+        matriz[4][7] = "( g )"
+        matriz[4][8] = "( e )"
+        restantes = restantes-1
+        aux[5] = "orange"
+        cor = "nada"
+
+def inserirCor():
+    global cor
+    global restantes
+    global verifcRepeticao
+    while(verificarFimDoJogo() == False):
+        os.system(cmdLimparTela) 
+        layout()
+        print("")
+        if (verificarEscolha() == True):
+            print(" !! Palavra/Cor não encontrada, tente novamente !!")
+        verifcRepeticao = False
+        for i in range(0,5):
+            if (aux[i] == cor.lower()):
+                verifcRepeticao = True
+        if (verifcRepeticao == True):
+            print(" !! Essa Palavra/Cor já foi encontrada !!")
+        cor = input(" -> Insira sua possivel resposta: ")
+        entradaCor()
+    os.system(cmdLimparTela)
+    layout()
+    print(" ")
+    print(" Você completou o palavras cruzadas, parabens !!!!")
+
+        
+
+
+setNulo()
+inserirCor()
+
+
