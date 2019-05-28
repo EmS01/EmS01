@@ -7,9 +7,9 @@ int main(void)
   int i;  
  
  void Layout(void){
-	printf("______________________________________\n");
-	printf("  CODIGO   |  ESPECIFICACAO  | PRECO  \n");
-	printf("--------------------------------------\n");
+    printf("______________________________________\n");
+    printf("  CODIGO   |  ESPECIFICACAO  | PRECO  \n");
+    printf("--------------------------------------\n");
     printf("  1        | Cachorro Quente | R$ 4.00\n");
     printf("  2        |     X-Salada    | R$ 4.50\n");
     printf("  3        |     X-Bacon     | R$ 5.00\n");
