@@ -1,0 +1,35 @@
+Sintax:
+
+global class test implements Database.Batchable<sObject>
+{
+	global Database.QueryLocator start(Database
+	.BatchableContext bc){
+	
+		return Database.getQueryLocator([Select
+		AnnualRevenue from Lead]);
+	}
+
+	
+	global void execute(Database.BatchableContext
+	bc, List<Lead> lList){
+	
+		for(Lead l : lList){
+		
+			if(l.annualRevenue != null){
+				l.annualRevenue = 3000000;
+			}
+
+
+		}
+
+
+		update lList;
+
+	}
+
+
+	global void finish(Database.BatchableContext bc){
+
+
+	}
+}
