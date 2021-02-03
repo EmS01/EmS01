@@ -1,125 +1,14 @@
-About Salesforce challenges:
-
-Create an Apex class with a method that returns an array (or list) of strings.
-
-public class StringArrayTest 
-{
-    
-    public static List<String> generateStringArray(Integer n)
-    {	
-        List<String> testList = new List<String>();
-        
-	for(Integer i = 0; i < n; i++) 
-        {
-            testList.add('Test '+i);
-	    System.debug(testList[i]);
-	}
-        
-        return testList;
-    }
-}
-
-Create a method for inserting accounts:
-
-public class AccountHandler 
-{
-    public static Account insertNewAccount(String accountName)
-    {	
-        Account acct = new Account();
-        acct.Name = accountName;
-        try
-        {
-        	insert acct;
-        }
-        catch(DmlException e){
-			return null;
-        }
-        
-        return acct;
-    }
-}
 
 
-Create an Apex class that returns contacts based on incoming parameters:
 
-public class ContactSearch 
-{
-    public static List<Contact> searchForContacts(String lstname, String MailingPostalCode)
-    {
-        List<Contact> contactList = new List<Contact>();
-        contactList = [SELECT LastName, MailingPostalCode FROM Contact WHERE LastName =: lstname AND MailingPostalCode =: MailingPostalCode];
-        
-        return contactList;
-        
-    }
-
-}
 
 Create an Apex trigger for Account that matches
  Shipping Address Postal Code with Billing Address Postal
  Code based on a custom field:
 
-trigger AccountAddressTrigger on Account (before insert, before update)
-{
-    for (Account acct:trigger.new)
-    {
-        if(acct.Match_Billing_Address__c == true)
-        {
-            acct.ShippingPostalCode = acct.BillingPostalCode;
-        }
-    
-    }
-
-}
 
 
-trigger ClosedOpportunityTrigger on Opportunity (after insert, after update) {
-	
-    List<Task> taskList = new List<Task>();
-    
-    for (Opportunity opp:Trigger.new)
-    {
-        if(opp.StageName = 'Closed Won')
-        {
-            Task t = new Task();
-            t.Subject = 'Follow Up Test Task';
-            t.WhatId = opp.Id;
-            taskList.add(t);
-        }
-    }
-    
-    if(taskList.size() > 0)
-    {
-        insert taskList;
-    }
-}
-
---> SOQL vs SQL
-
-- SOQL 
-doesn't have other statements besides SELECT
-(there is no insert, update, delete)
-
-- There's no SELECT * (all)
-- There's no JOIN
 
 
---> SOSL
-
-* matches zero or more characters at the middle or end of
-the search term;
-? matches only one character at the middle or end of the search 
-term.
-
-We use SOSL when we don't know which field or object
-contains the information we want to return, or when
-there's no relationship between the objects. 
-
-- DML
-
---> Aura Components
-Applications with aura components have a unique page, and they're
-called SPA or single-page applications.
-We shouldn't treat a component as a page.
 
 
